@@ -43,6 +43,9 @@ COPY scripts/link-plugin-dev-sdk.mjs scripts/
 
 RUN pnpm install --no-frozen-lockfile
 
+# Build the forked hermes-paperclip-adapter (git dep, no pre-built dist/)
+RUN cd node_modules/hermes-paperclip-adapter && npx tsc
+
 FROM base AS build
 WORKDIR /app
 COPY --from=deps /app /app
